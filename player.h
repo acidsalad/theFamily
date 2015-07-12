@@ -5,15 +5,15 @@ class Player{
 public:
 	friend std::ostream& operator<<(std::ostream&, const Player&);
 	friend std::istream& operator>>(std::istream& is, Player& your);
+	friend class Storybook;
 
 	Player();
 	~Player();
 	
 	int attack();
 	void createCharacter(Player*);
-	void STORY(Player*);
 
-private:	
+protected:	
 	int hp;
 	int pp;
 	std::string his;
@@ -22,5 +22,5 @@ private:
 	
 	int attackPrivate(int);
 	void createCharacterPrivate(Player*);
-	void STORYpriv(Player*, int, int);
+	
 };

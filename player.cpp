@@ -31,7 +31,7 @@ Player::Player()
 	
 Player::~Player()
 {
-	printf("%s has died.\n", name.c_str());
+	cout << name << " has died.\n";
 }
 
 void Player::createCharacter(Player* y)
