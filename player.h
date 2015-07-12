@@ -5,13 +5,16 @@ public:
 	Player(){
 		hp = 30;
 		pp = 10;
+		name = "fuckboy";
 	}
 	
 	int attack();
+	
 
 private:	
 	int hp;
 	int pp;
-	int attack(int);
+	int attackPrivate(int);
+	string name;
 	
 };

@@ -5,14 +5,15 @@ public:
 	Enemy(){
 		hp = 0;
 		pp = 0;
-	}
+		name = "default";
+	} 
 	
 	int attack();
 
-private:	
+protected:	
 	int hp;
 	int pp;
-	int attack(int);
 	string name;
 	
+	int attackPrivate(int);
 };
