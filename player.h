@@ -3,6 +3,8 @@
 
 class Player{
 public:
+	friend std::ostream& operator<<(std::ostream&,const Player&);
+
 	Player();
 	~Player();
 	
@@ -16,6 +18,7 @@ private:
 	std::string his;
 	std::string he;
 	std::string name;
+	
 	int attackPrivate(int);
 	void createCharacterPrivate(Player*);
 	void STORYpriv(Player*, int, int);

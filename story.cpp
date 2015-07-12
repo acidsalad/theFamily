@@ -11,6 +11,6 @@ void Player::STORY(Player* y)
 
 void Player::STORYpriv(Player* your, int hp, int pp)
 {
-	cout << "This is the beginning of the goddamn story." << endl;
-	cout << /*your->name <<*/ " has an awful relationship with " /*<< his* */ << " parents.";
+	cout << "This is the beginning of " << your->name << "'s beautiful, teenage-rebellion story." << endl;
+	cout << your->name << " has an awful relationship with " << his << " parents." << endl;
 }

@@ -1,7 +1,8 @@
 #include "player.h"
 #include <string>
-using std::cin;
+using std::cout;
 
+// overloading <<, constructing class, and destructing class
 std::ostream& operator<<(std::ostream& os, const Player& y)
 {
   std::cout << "";
@@ -33,14 +34,13 @@ void Player::createCharacterPrivate(Player* your)
 	printf("Please enter your name: ");
 	scanf("%s", your->name.c_str());
 	
-	printf("\nAre you a boy or a girl?\n");
+	cout << "\nAre you a boy or a girl?\n";
 	scanf("%s", input);
-	if(input == "boy" || input == "Boy" || input == "BOY" || input == "a boy")
+	if (input == "boy" || input == "Boy" || input == "BOY" || input == "a boy")
 	{
-		your->his.assign("his");
-		your->he.assign("he");
+		// keep defaults
 	}
-	else if(input == "girl" || input == "Girl" || input == "GIRL" || input == "a girl")
+	else if (input == "girl" || input == "Girl" || input == "GIRL" || input == "a girl")
 	{
 		your->his = "her";
 		your->he = "she";
