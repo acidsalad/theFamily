@@ -1,13 +1,23 @@
+#ifndef _PLAYERCPP
+#define _PLAYERCPP
+
 #include "player.h"
 #include <string>
 using std::cout;
 using std::endl;
+using std::cin;
 
-// overloading <<, constructing class, and destructing class
+// overloading <<, >>, constructing class, and destructing class
 std::ostream& operator<<(std::ostream& os, const Player& your)
 {
   std::cout << "";
   return os;
+}
+
+std::istream& operator>>(std::istream& is, Player& your)
+{
+	std::cin >> your.name;
+	return is;
 }
 
 Player::Player()
@@ -16,7 +26,7 @@ Player::Player()
 		pp = 10;
 		name = "fuckboy";
 		his = "his";
-		he = "he";
+		he = "He";
 	}
 	
 Player::~Player()
@@ -33,13 +43,18 @@ void Player::createCharacterPrivate(Player* your)
 {
 	std::string input;
 	printf("Please enter your name: ");
-	scanf("%s", your->name.c_str());
+	cin >> your->name;
+	//scanf("%s", your->name.c_str());
+	int n = your->name.length();
+	
+	
 	
 	cout << "\nAre you a boy or a girl?\n";
-	scanf("%s", input.c_str());
+	cin >> input;
 	cout << "Your name is a word of length " << your->name.length() << endl;
-	int n = input.length();
+	cout << your->name << endl;
 	cout << "Your gender is a word of length " << input.length() << endl;
+	cout << input << endl;
 	if (input == "boy" || input == "Boy" || input == "BOY" || input == "a boy")
 	{
 		// keep defaults
@@ -47,11 +62,13 @@ void Player::createCharacterPrivate(Player* your)
 	else if (input == "girl" || input == "Girl" || input == "GIRL" || input == "a girl")
 	{
 		your->his = "her";
-		your->he = "she";
+		your->he = "She";
 	}
 	else
 	{
 		your->his = "its";
-		your->he = "it";
+		your->he = "It";
 	}
 }
+
+#endif

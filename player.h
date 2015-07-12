@@ -3,7 +3,8 @@
 
 class Player{
 public:
-	friend std::ostream& operator<<(std::ostream&,const Player&);
+	friend std::ostream& operator<<(std::ostream&, const Player&);
+	friend std::istream& operator>>(std::istream& is, Player& your);
 
 	Player();
 	~Player();
