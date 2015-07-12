@@ -3,11 +3,14 @@
 
 class Storybook : public Player{
 public:
-	void STORY(Player*);
+	void STORY();
+	Storybook();
 	~Storybook();
+	Player* your = new Player;
 	
 private:
-	void STORYpriv(Player*, int, int);
-	void Home(int);
-	void Darla(int);
+	void STORYpriv(Player*);
+	void Home(Player*);
+	void Darla(Player*);
+	void Detention(Player*);
 };
