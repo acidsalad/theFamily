@@ -1,3 +1,7 @@
+//The dice roll and attack do not correspond to each other.
+//this is just an experimental .cpp file
+//mainly curious in the default_random_generator type.
+
 #include <iostream>
 #include <string>
 #include <random>

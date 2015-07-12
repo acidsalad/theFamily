@@ -1,4 +1,12 @@
 #include "player.h"
+#include <string>
+using std::cin;
+
+std::ostream& operator<<(std::ostream& os, const Player& y)
+{
+  std::cout << "";
+  return os;
+}
 
 Player::Player()
 {
@@ -29,8 +37,8 @@ void Player::createCharacterPrivate(Player* your)
 	scanf("%s", input);
 	if(input == "boy" || input == "Boy" || input == "BOY" || input == "a boy")
 	{
-		your->his = "his";
-		your->he = "he";
+		your->his.assign("his");
+		your->he.assign("he");
 	}
 	else if(input == "girl" || input == "Girl" || input == "GIRL" || input == "a girl")
 	{

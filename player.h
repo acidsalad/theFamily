@@ -13,7 +13,8 @@ public:
 private:	
 	int hp;
 	int pp;
-	std::string his, he;
+	std::string his;
+	std::string he;
 	std::string name;
 	int attackPrivate(int);
 	void createCharacterPrivate(Player*);
