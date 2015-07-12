@@ -8,12 +8,14 @@ public:
 	
 	int attack();
 	void createCharacter(Player*);
+	void STORY(Player*);
 
 private:	
 	int hp;
 	int pp;
-	int attackPrivate(int);
+	std::string his, he;
 	std::string name;
+	int attackPrivate(int);
 	void createCharacterPrivate(Player*);
-	
+	void STORYpriv(Player*, int, int);
 };

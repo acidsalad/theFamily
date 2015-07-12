@@ -5,6 +5,8 @@ Player::Player()
 		hp = 30;
 		pp = 10;
 		name = "fuckboy";
+		his = "his";
+		he = "he";
 	}
 	
 Player::~Player()
@@ -19,7 +21,25 @@ void Player::createCharacter(Player* y)
 
 void Player::createCharacterPrivate(Player* your)
 {
+	std::string input;
 	printf("Please enter your name: ");
 	scanf("%s", your->name.c_str());
-	printf("\n");
+	
+	printf("\nAre you a boy or a girl?\n");
+	scanf("%s", input);
+	if(input == "boy" || input == "Boy" || input == "BOY" || input == "a boy")
+	{
+		your->his = "his";
+		your->he = "he";
+	}
+	else if(input == "girl" || input == "Girl" || input == "GIRL" || input == "a girl")
+	{
+		your->his = "her";
+		your->he = "she";
+	}
+	else
+	{
+		your->his = "its";
+		your->he = "it";
+	}
 }
