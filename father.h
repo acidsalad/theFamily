@@ -11,7 +11,7 @@ public:
 
 	int shout();
 
-private:
+protected:
 	int shoutPrivate(string);
 	
 }

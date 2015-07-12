@@ -4,5 +4,5 @@
 
 int enemy::attack()
 {
-	attackPrivate()
+	attackPrivate();
 }

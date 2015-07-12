@@ -1,20 +1,19 @@
 #pragma once
+#include <iostream>
 
 class Player{
 public:
-	Player(){
-		hp = 30;
-		pp = 10;
-		name = "fuckboy";
-	}
+	Player();
+	~Player();
 	
 	int attack();
-	
+	void createCharacter(Player*);
 
 private:	
 	int hp;
 	int pp;
 	int attackPrivate(int);
-	string name;
+	std::string name;
+	void createCharacterPrivate(Player*);
 	
 };
