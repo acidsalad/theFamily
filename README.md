@@ -6,9 +6,10 @@ All but the diceRoll.cpp file are relevant to this project.
 I am a mathematician learning to code with object-oriented programming.
 In this game, you must fight your family and escape the earth. It's simple, but a good place to stary.
 #The problems at the time of this post (can be found under the errorBranch branch) are:
-  1: player.cpp file crashes whenever I try to overwrite private variables with a private function.
+  1: FIXED. Easy fix.
       - although this could be the main.cpp crashing after the function call.
-#2: RE-FIXED. Again. In order to make sure this stays fixed, I'm keeping in the length checks until further notice.
+2: RE-FIXED. Again. In order to make sure this stays fixed, I'm keeping in the length checks until further notice.
+#3: Ghost player character is on the heap somewhere. We either need to free up this memory or utilize it. See err2.0 tag for more details
     
 #More information in the tags and commits.
 
