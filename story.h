@@ -9,6 +9,7 @@ public:
 	Storybook();
 	~Storybook();
 	Player* your = new Player;
+	std::string randomDarlaSaying(Player*);
 	
 private:
 

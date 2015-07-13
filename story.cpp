@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <chrono>
+#include <thread>
 #include "player.h"
 #include "story.h"
 #include "tictac.cpp"
@@ -103,8 +105,33 @@ void Storybook::Darla(Player* y)
 	
 	string darsays = randomDarlaSaying(your);
 	cout << NPCDarla << ": " << darsays << endl;
-	cout << your->anger << endl;
 	}
+}
+
+string Storybook::randomDarlaSaying(Player* your)
+{
+	string array[4];
+	array[0] = "What a DARING move, my DARlING ?\n";
+	array[1] = "I DARE say...\n";
+	array[2] = "Your father has a very BIG belt ;)\n";
+	array[3] = "FUCK you, " + your->name + ".\n";
+	
+	static default_random_engine rando(time(NULL));
+	uniform_int_distribution<int> ar(0, 3);
+	int n = ar(rando);
+	if (n == 2)
+	{
+		your->anger++;
+		cout << your->name << "'s anger has increased by 1 because you can see the future." << endl;
+		for (int i = 0; i<4; i++){
+			std::this_thread::sleep_for(std::chrono::nanoseconds(500000000));
+			if (i != 3)
+			cout << ".";
+			else
+			cout << endl;
+		}
+	}
+	return array[n];
 }
 
 void Storybook::Detention(Player* y)

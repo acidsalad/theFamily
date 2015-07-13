@@ -30,31 +30,12 @@ void placeTic(char board[3][3])
 	static default_random_engine rando(time(NULL));
 	uniform_int_distribution<int> ar(1, 3);
 	int x2 = x, y2 = y;
-	while(x2 == x && y2 == y)
-	{
+	do {
 		x2 = ar(rando);
 		y2 = ar(rando);
-		if(x2 != x && y2 != y)
+		if(x2 != x || y2 != y)
 		{
-			board[x2-1][y2-1] = 'O';
-		}
-	}
-}
-
-string randomDarlaSaying(Player* your)
-{
-	string array[4];
-	array[0] = "What a DARING move, my DARlING ?\n";
-	array[1] = "I DARE say...\n";
-	array[2] = "Your father has a very BIG belt ;)\n";
-	array[3] = "FUCK you,";
-	
-	static default_random_engine rando(time(NULL));
-	uniform_int_distribution<int> ar(0, 3);
-	int n = ar(rando);
-	if (n == 2)
-	{
-		your->anger++;
-	}
-	return array[n];
+			board[y2-1][x2-1] = 'O';
+		} 
+	} while (x2 == x && y2 == y);
 }

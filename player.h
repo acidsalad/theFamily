@@ -12,8 +12,6 @@ public:
 	
 	int attack();
 	void createCharacter(Player*);
-	
-	int anger;
 
 protected:	
 	int hp;
@@ -22,7 +20,7 @@ protected:
 	std::string he;
 	std::string name;
 	
-	
+	int anger;
 	int attackPrivate(int);
 	void createCharacterPrivate(Player*);
 	
