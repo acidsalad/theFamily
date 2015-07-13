@@ -25,7 +25,8 @@ Player::Player()
 		hp = 30;
 		pp = 10;
 		anger = 0;
-		name = "fuckboy";
+		ghostCount = 0;
+		name = "Ghost" + static_cast<char>(ghostCount + 1);
 		his = "his";
 		he = "He";
 	}

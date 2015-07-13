@@ -63,7 +63,7 @@ void Storybook::Home(Player* y)
 	
 }
 
-void Storybook::Darla(Player* y)
+void Storybook::Darla(Player* your)
 {
 	int input;
 	char board[3][3];
@@ -84,29 +84,52 @@ void Storybook::Darla(Player* y)
 	printBoard(board);
 	while(!gameOver)
 	{
-	placeTic(board);
-	printBoard(board);
-	if ((board[0][0] == 'X' && board[0][1] == 'X' && board[0][2] == 'X') || (board[0][0] == 'O' && board[0][1] == 'O' && board[0][2] == 'O'))
-	gameOver = true;
-	if ((board[1][0] == 'X' && board[1][1] == 'X' && board[1][2] == 'X') || (board[1][0] == 'O' && board[1][1] == 'O' && board[1][2] == 'O'))
-	gameOver = true;
-	if ((board[2][0] == 'X' && board[2][1] == 'X' && board[2][2] == 'X') || (board[2][0] == 'O' && board[2][1] == 'O' && board[2][2] == 'O'))
-	gameOver = true;
-	if ((board[0][0] == 'X' && board[1][0] == 'X' && board[2][0] == 'X') || (board[0][0] == 'O' && board[1][0] == 'O' && board[2][0] == 'O'))
-	gameOver = true;
-	if ((board[0][1] == 'X' && board[1][1] == 'X' && board[2][1] == 'X') || (board[0][1] == 'O' && board[1][1] == 'O' && board[2][1] == 'O'))
-	gameOver = true;
-	if ((board[0][2] == 'X' && board[1][2] == 'X' && board[2][2] == 'X') || (board[0][2] == 'O' && board[1][2] == 'O' && board[2][2] == 'O'))
-	gameOver = true;
-	if ((board[0][0] == 'X' && board[1][1] == 'X' && board[2][2] == 'X') || (board[0][0] == 'O' && board[1][1] == 'O' && board[2][2] == 'O'))
-	gameOver = true;
-	if ((board[0][2] == 'X' && board[1][1] == 'X' && board[2][0] == 'X') || (board[0][2] == 'O' && board[1][1] == 'O' && board[2][0] == 'O'))
-	gameOver = true;
-	
-	string darsays = randomDarlaSaying(your);
-	cout << NPCDarla << ": " << darsays << endl;
+		placeTic(board);
+		gameOver = ThreeInaRow(board);
+		fullBoard(board, your);
+		if (!gameOver)
+		{
+			std::this_thread::sleep_for(std::chrono::nanoseconds(1500000000));
+			placeTac(board);
+			gameOver = ThreeInaRow(board);
+			fullBoard(board, your);
+			printBoard(board);
+		
+			string darsays = randomDarlaSaying(your);
+			cout << NPCDarla << ": " << darsays << endl;
+		}
 	}
 }
+
+
+void Storybook::placeTic(char board[3][3])
+{
+	int x,y;
+	cout << "Enter an x-value: ";
+	cin >> x;
+	cout << "Enter a y-value: ";
+	cin >> y;
+	board[(y-1)][(x-1)] = 'X';
+	
+	printBoard(board);
+}
+
+void Storybook::placeTac(char board[3][3])	
+{
+	static default_random_engine rando(time(NULL));
+	uniform_int_distribution<int> ar(1, 3);
+	int x2, y2;
+	do {
+		x2 = ar(rando);
+		y2 = ar(rando);
+		if(board[(y2-1)][(x2-1)] != 'X' && board[(y2-1)][(x2-1)] != 'O')
+		{
+			board[(y2-1)][(x2-1)] = 'O';
+			break;
+		} 
+	} while (board[y2-1][x2-1] == 'X' || board[y2-1][x2-1] == 'O');
+}
+
 
 string Storybook::randomDarlaSaying(Player* your)
 {
