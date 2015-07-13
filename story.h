@@ -2,6 +2,8 @@
 #include "player.h"
 
 class Storybook : public Player{
+	//friend operator==()
+	
 public:
 	void STORY();
 	Storybook();
