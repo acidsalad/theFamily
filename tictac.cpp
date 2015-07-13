@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const string NPCDarla = "DARLA THE DARING";
+
 void printBoard(char board[3][3])
 {
 	for (int y = 0; y < 3; y++){
@@ -37,4 +39,22 @@ void placeTic(char board[3][3])
 			board[x2-1][y2-1] = 'O';
 		}
 	}
+}
+
+string randomDarlaSaying(Player* your)
+{
+	string array[4];
+	array[0] = "What a DARING move, my DARlING ?\n";
+	array[1] = "I DARE say...\n";
+	array[2] = "Your father has a very BIG belt ;)\n";
+	array[3] = "FUCK you,";
+	
+	static default_random_engine rando(time(NULL));
+	uniform_int_distribution<int> ar(0, 3);
+	int n = ar(rando);
+	if (n == 2)
+	{
+		your->anger++;
+	}
+	return array[n];
 }

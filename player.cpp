@@ -24,6 +24,7 @@ Player::Player()
 {
 		hp = 30;
 		pp = 10;
+		anger = 0;
 		name = "fuckboy";
 		his = "his";
 		he = "He";

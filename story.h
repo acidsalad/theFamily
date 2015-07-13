@@ -11,8 +11,10 @@ public:
 	Player* your = new Player;
 	
 private:
+
 	void STORYpriv(Player*);
 	void Home(Player*);
 	void Darla(Player*);
 	void Detention(Player*);
+	
 };

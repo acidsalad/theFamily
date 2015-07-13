@@ -34,14 +34,13 @@ void Storybook::STORYpriv(Player* your)
 	
 	cout << "This is the beginning of " << your->name << "'s beautiful, teenage-rebellion story." << endl;
 	cout << your->name << " has an awful relationship with " << your->his << " parents." << endl;
-	cout << your->he << " recently had sex with DARLA THE DARING next door." << endl;
+	cout << your->he << " recently had sex with "<< NPCDarla << " next door." << endl;
 	cout << "The first to find out about this was " << your->name << "'s dad." << endl;
 	
-	cout << "Would you like to brave your house or go back and see Darla?" << endl;
-	cout << "Press [1] to go home, [2] to go to Darla's:\n";
+	cout << "Would you like to brave your house or go back and see " << NPCDarla << "?" << endl;
+	cout << "Press [1] to go home, [2] to go to " << NPCDarla << "'s:\n";
 	cin >> input;
 	
-	//input == 1 ? Home(chapter) : Darla(chapter);
 		switch (input)
 		{
 			case 1:
@@ -75,7 +74,7 @@ void Storybook::Darla(Player* y)
 		}
 	}
 	
-	cout << "Darla: Let's play a game of TIC-TAC-TOE!" << endl;
+	cout << NPCDarla << ": Let's play a game of TIC-TAC-TOE!" << endl;
 	cout << "[1] - yes\t[2] - no" << endl;
 	cin >> input;
 	//you're going to play no matter what you say.
@@ -102,6 +101,9 @@ void Storybook::Darla(Player* y)
 	if ((board[0][2] == 'X' && board[1][1] == 'X' && board[2][0] == 'X') || (board[0][2] == 'O' && board[1][1] == 'O' && board[2][0] == 'O'))
 	gameOver = true;
 	
+	string darsays = randomDarlaSaying(your);
+	cout << NPCDarla << ": " << darsays << endl;
+	cout << your->anger << endl;
 	}
 }
 
