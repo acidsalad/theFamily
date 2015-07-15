@@ -6,15 +6,9 @@
 using namespace std;
 
 
-Enemy::Enemy(string name, char tile, int attack, int defense, int hp, int exp, int attackDistance)
+Enemy::Enemy() 
 {
-	_name = name;
-	_avatar = tile;
-	_attack = attack;
-	_defense = defense;
-	_hp = hp;
-	_expValue = exp;
-	_attackDistance = attackDistance;
+
 }
 
 
@@ -50,39 +44,64 @@ char Enemy::getMove(int playerX, int playerY)
 	int adx = abs(dx), ady = abs(dy);
 
 	distance = sqrt((pow(adx, 2)) + pow(ady, 2.0));
-
-	if (distance <= _attackDistance){
-		//should the enemy move left/right?
-		if (adx > ady) {
-			if (dx < 0) {
+	switch (_avatar)
+	{
+	case 'v':
+		if (distance <= _attackDistance && distance >= 4){
+			//should the enemy move left/right?
+			if (adx > ady) {
+				if (dx < 0) {
+					return 'a';
+				}
+				else {
+					return 'd';
+				}
+			}
+			else { // or up/down?
+				if (dy < 0) {
+					return 'w';
+				}
+				else {
+					return 's';
+				}
+			}
+		}
+		break;
+	default:
+		if (distance <= _attackDistance){
+			//should the enemy move left/right?
+			if (adx > ady) {
+				if (dx < 0) {
+					return 'a';
+				}
+				else {
+					return 'd';
+				}
+			}
+			else { // or up/down?
+				if (dy < 0) {
+					return 'w';
+				}
+				else {
+					return 's';
+				}
+			}
+		}
+		else {
+			int randomMove = moveRoll(randomEngine);
+			switch (randomMove){
+			case 0:
 				return 'a';
-			}
-			else {
-				return 'd';
-			}
-		}
-		else { // or up/down?
-			if (dy < 0) {
+			case 1:
 				return 'w';
-			}
-			else {
+			case 2:
 				return 's';
+			case 3:
+				return 'd';
+			default:
+				return '.';
 			}
 		}
-	}
-	else {
-		int randomMove = moveRoll(randomEngine);
-		switch (randomMove){
-		case 0:
-			return 'a';
-		case 1:
-			return 'w';
-		case 2:
-			return 's';
-		case 3:
-			return 'd';
-		default:
-			return '.';
-		}
+		break;
 	}
 }

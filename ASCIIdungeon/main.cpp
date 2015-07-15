@@ -8,8 +8,12 @@ using namespace std;
 
 int main()
 {
-	gameSystem gs("level1.txt");
+	bool isDone = false;
+	int levelNumber = 0;
+	gameSystem gs;
 	gs.playGame();
+
+	
 
 	system("PAUSE");
 }

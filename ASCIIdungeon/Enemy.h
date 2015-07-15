@@ -3,7 +3,7 @@
 
 class Enemy :	public Entity {
 public:
-	Enemy(string name, char tile, int attack, int defense, int hp, int exp, int attackDistance);
+	Enemy();
 	~Enemy();
 
 	int takeDamage(int attack);
@@ -13,7 +13,7 @@ public:
 	//Gets AI move command
 	char getMove(int playerX, int playerY);
 
-private:
+protected:
 	int _expValue;
 	int _attackDistance;
 

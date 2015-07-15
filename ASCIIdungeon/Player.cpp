@@ -40,23 +40,31 @@ int Player::takeDamage(int attack)
 		if (_hp <= 0)
 			return 1;
 	}
+	else {
+		return -1;
+	}
 	return 0;
 }
 
 void Player::addExperience(int exp) { 
-	static default_random_engine randomGenerator;
-	uniform_int_distribution<int> stats(1, 3);
+	static default_random_engine randomGenerator(time(NULL));
+	uniform_int_distribution<int> statsAandD(1, 3);
+	uniform_int_distribution<int> statsHandP(2, 5);
 
 	_exp += exp;
 	while (_exp >= _toNextLevel) {
 		printf("Leveled up!\n");
 		_exp -= _toNextLevel;
-		_attack += stats(randomGenerator);
-		_defense += stats(randomGenerator);
-		_hp += stats(randomGenerator);
-		_pp += stats(randomGenerator);
+		_attack += statsAandD(randomGenerator);
+		_defense += statsAandD(randomGenerator);
+		_hp += statsHandP(randomGenerator);
+		_pp += statsHandP(randomGenerator);
 		_toNextLevel = _toNextLevel + pow((_level + _attack + _defense), 2);
 		_level += 1;
-		system("PAUSE");
 	}
 }
+
+
+
+
+

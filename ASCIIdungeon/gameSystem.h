@@ -9,11 +9,15 @@ using namespace std;
 class gameSystem
 {
 public:
-	gameSystem(string levelFileName);
-	~gameSystem();
+	gameSystem();
 
+	//initializes game
 	void playGame();
+	//moves player and processes move
 	void playerMove();
+
+	//clears the screen
+	void ClearScreen();
 
 private:
 	Level _level;

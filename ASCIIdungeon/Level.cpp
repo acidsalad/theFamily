@@ -1,13 +1,20 @@
 #include "Level.h"
 #include <iostream>
 #include <string>
-#include <Windows.h>
+#include "Exclamation.h"
+#include "DangerousPussy.h"
+#include "DangerousVagina.h"
+#include "YouAreHere.h"
 
 using namespace std;
 
 Level::Level()
 {
-
+	//Store the levels in a vector.
+	_levels.push_back("level0.txt");
+	_levels.push_back("level1.txt");
+	_levels.push_back("level2.txt");
+	//....
 }
 
 
@@ -15,6 +22,7 @@ Level::~Level()
 {
 
 }
+
 
 void Level::load(string fileName, Player* &player) {
 	//level loader
@@ -26,61 +34,123 @@ void Level::load(string fileName, Player* &player) {
 		exit(1);
 	}
 	string line;
-	while (getline(file, line))
+	if (fileName == "level0.txt" || fileName == "level2.txt")
 	{
-		_levelData.push_back(line);
+		while (getline(file, line))
+		{
+			_levelDataCutScene.push_back(line);
+		}
+	}
+	else {
+		while (getline(file, line))
+		{
+			_levelData.push_back(line);
+		}
 	}
 
 	file.close();
 
 	//Process the level
 	char tile;
-
-	for (int i = 0; i < _levelData.size(); i++) {
-		for (int j = 0; j < _levelData[i].size(); j++) {
-			tile = _levelData[i][j];
-			switch (tile) {
-			case '@':
-				player->setPosition(j, i);
-				break;
-			case 'D':
-				break;
-			case 'T':
-				break; 
-			case '!': //Exclamation Enemy!
-				_enemies.push_back(Enemy("Exclamation Guy", tile, 1, 2, 4, 50, 10));
-				_enemies.back().setPosition(j, i);
-				break;
-			case 'P': // DANGEROUS PUSSY!
-				_enemies.push_back(Enemy("DANGEROUS PUSSY", tile, 2, 3, 5, 100, 5));
-				_enemies.back().setPosition(j, i);
-				break;
-			case '0': // DANGEROUS VAGINA!
-				_enemies.push_back(Enemy("Dangerous Vagina", tile, 4, 20, 20, 500, 3));
-				_enemies.back().setPosition(j, i);
-				break;
+	if (_levelData.size() != 0)
+	{
+		for (int i = 0; i < _levelData.size(); i++) {
+			for (int j = 0; j < _levelData[i].size(); j++) {
+				tile = _levelData[i][j];
+				switch (tile) {
+				case '@':
+					player->setPosition(j, i);
+					break;
+				case 'D':
+					break;
+				case 'T':
+					break;
+				case 'F':
+					_NPCs.push_back(NPC('F'));
+					_NPCs.back().setPosition(j, i);
+					break;
+				case '!': //Exclamation Enemy!
+					_enemies.push_back(Exclamation());
+					_enemies.back().setPosition(j, i);
+					break;
+				case 'P': // DANGEROUS PUSSY!
+					_enemies.push_back(DangerousPussy());
+					_enemies.back().setPosition(j, i);
+					break;
+				case '0': // DANGEROUS VAGINA!
+					_enemies.push_back(DangerousVagina());
+					_enemies.back().setPosition(j, i);
+					break;
+				case 'v': //YOUAREHERE!
+					_enemies.push_back(YouAreHere());
+					_enemies.back().setPosition(j, i);
+					break;
+				}
 			}
 		}
 	}
-
+	else {
+		for (int i = 0; i < _levelDataCutScene.size(); i++) {
+			for (int j = 0; j < _levelDataCutScene[i].size(); j++) {
+				tile = _levelDataCutScene[i][j];
+				switch (tile) {
+				case '@':
+					player->setPosition(j, i);
+					break;
+				case 'D':
+					break;
+				case 'T':
+					break;
+				case 'F':
+					_NPCs.push_back(NPC('F'));
+					_NPCs.back().setPosition(j, i);
+					break;
+				case '!': //Exclamation Enemy!
+					_enemies.push_back(Exclamation());
+					_enemies.back().setPosition(j, i);
+					break;
+				case 'P': // DANGEROUS PUSSY!
+					_enemies.push_back(DangerousPussy());
+					_enemies.back().setPosition(j, i);
+					break;
+				case '0': // DANGEROUS VAGINA!
+					_enemies.push_back(DangerousVagina());
+					_enemies.back().setPosition(j, i);
+					break;
+				case 'v': //YOUAREHERE!
+					_enemies.push_back(YouAreHere());
+					_enemies.back().setPosition(j, i);
+					break;
+				}
+			}
+		}
+	}
 }
 
 void Level::print(Player* &player)
 {
-	cout << string(100, '\n');
-
-	printf("%s\tPlayer Name: %s\n", _levelData[0].c_str(), player->getName().c_str());
-	printf("%s\tLevel: %d\n", _levelData[1].c_str(), player->getLevel());
-	printf("%s\tHP: %d\n", _levelData[2].c_str(), player->get_hp());
-	printf("%s\tPP: %d\n", _levelData[3].c_str(), player->get_pp());
-	printf("%s\txp: %d\n", _levelData[4].c_str(), player->getExp());
-	printf("%s\tTo Next Level: %d\n", _levelData[5].c_str(), player->get_tNL());
-	
-	for (int i = 6; i < _levelData.size(); i++)
+	if (_levelData.size() != 0)
 	{
-		printf("%s\n", _levelData[i].c_str());
+		printf("%s\tPlayer Name: %s\n", _levelData[0].c_str(), player->getName().c_str());
+		printf("%s\tLevel: %d\n", _levelData[1].c_str(), player->getLevel());
+		printf("%s\tHP: %d\n", _levelData[2].c_str(), player->get_hp());
+		printf("%s\tPP: %d\n", _levelData[3].c_str(), player->get_pp());
+		printf("%s\txp: %d\n", _levelData[4].c_str(), player->getExp());
+		printf("%s\tTo Next Level: %d\n", _levelData[5].c_str(), player->get_tNL());
+
+		for (int i = 6; i < _levelData.size(); i++)
+		{
+			printf("%s\n", _levelData[i].c_str());
+		}
+		cout << endl;
 	}
-	cout << endl;
+	else {
+		for (int i = 0; i < _levelDataCutScene.size(); i++)
+		{
+			printf("%s\n", _levelDataCutScene[i].c_str());
+		}
+		cout << endl;
+	}
 }
 
 void Level::movePlayer(char input, Player* &player)
@@ -111,12 +181,6 @@ void Level::movePlayer(char input, Player* &player)
 		break;
 	}
 }
-	//void Level::updateMonsters(Player* &player)
-	//{
-		//for (int i = 0, i < _enemies.size(); i++) {
-
-		//}
-	//}
 
 
 void Level::processPlayerMove(Player* &player, int targetX, int targetY)
@@ -125,14 +189,27 @@ void Level::processPlayerMove(Player* &player, int targetX, int targetY)
 	player->getPosition(playerX, playerY);
 
 	char moveTile = getTile(targetX, targetY);
+	//string line = "Get fucking rekt, pussy lips.";
 
 	switch (moveTile)
 	{
-	case '#': printf("That is a wall, dumbass.\n");
+	case '#':
+	case 'v':
 		break;
 	case '.': player->setPosition(targetX, targetY);
 		setTile(playerX, playerY, '.');
 		setTile(targetX, targetY, '@');
+		break;
+	case ' ': 
+		player->setPosition(targetX, targetY);
+		setTile(playerX, playerY, ' ');
+		setTile(targetX, targetY, '@');
+		break;
+		break;
+	case 'T':
+		break;
+	case 'D': 
+		newLevel(player);
 		break;
 	default:
 		battleMonster(player, targetX, targetY);
@@ -141,12 +218,18 @@ void Level::processPlayerMove(Player* &player, int targetX, int targetY)
 }
 
 	char Level::getTile(int x, int y) {
-		return _levelData[y][x];
+		if (_levelData.size() != 0)
+			return _levelData[y][x];
+		else
+			return _levelDataCutScene[y][x];
 	}
 
 	void Level::setTile(int x, int y, char tile)
 	{
-		_levelData[y][x] = tile;
+		if (_levelData.size() != 0)
+			_levelData[y][x] = tile;
+		else
+			_levelDataCutScene[y][x] = tile;
 	}
 
 void Level::processEnemyMove(Player* &player, int enemyIndex, int targetX, int targetY) {
@@ -165,6 +248,9 @@ void Level::processEnemyMove(Player* &player, int enemyIndex, int targetX, int t
 		setTile(enemyX, enemyY, '.');
 		setTile(targetX, targetY, _enemies[enemyIndex].getAvatar());
 		break;
+	case ' ': _enemies[enemyIndex].setPosition(targetX, targetY);
+		setTile(enemyX, enemyY, ' ');
+		setTile(targetX, targetY, _enemies[enemyIndex].getAvatar());
 	default:
 
 		break;
@@ -185,17 +271,17 @@ void Level::processEnemyMove(Player* &player, int enemyIndex, int targetX, int t
 			_enemies[i].getPosition(enemyX, enemyY);
 			if (targetX == enemyX && targetY == enemyY)
 			{
+				int playerDefense = player->getDefense();
 				int enemyDefense = _enemies[i].getDefense();
 				string enemyName = _enemies[i].getName();
 				//WE MUST DO BATTLE
 				attack = player->attack();
 
 				attackResult = _enemies[i].takeDamage(attack);
-				printf("%s does damage of %d!\n", playerName.c_str(), attack - enemyDefense);
 				if (attackResult != 0 && attackResult != -1) {
-					print(player);
+				printf("%s does damage of %d!\n", playerName.c_str(), attack - enemyDefense);
+				
 					printf("%s met a bitter end.\n", enemyName.c_str());
-					system("PAUSE");
 					player->addExperience(attackResult);
 
 					_enemies[i] = _enemies.back();
@@ -205,23 +291,32 @@ void Level::processEnemyMove(Player* &player, int enemyIndex, int targetX, int t
 					return;
 				}
 				else if (attackResult == -1) {
+					printf("%s does damage of %d!\n", playerName.c_str(), 0);
 					printf("You didn't even dent %s.\n", enemyName.c_str());
+				}
+				else {
+					printf("%s does damage of %d!\n", playerName.c_str(), attack - enemyDefense);
 				}
 				//monster fights now!
 				attack = _enemies[i].attack();
 				attackResult = player->takeDamage(attack);
-				printf("%s does damage of %d\n", enemyName.c_str(), attack);
 				
-				if (attackResult != 0) {
+				if (attackResult != 0 && attackResult != -1) {
+				printf("%s does damage of %d\n", enemyName.c_str(), attack - playerDefense);
 					setTile(playerX, playerY, '.');
-					print(player);
 					printf("%s met a bitter end.", playerName.c_str());
-					system("PAUSE");
+					
 					player->addExperience(attackResult);
-
+					system("PAUSE");
 					exit(1);
 				}
-				system("PAUSE");
+				else if (attackResult == -1) {
+					printf("%s does damage of %d!\n", enemyName.c_str(), 0);
+				}
+				else {
+					printf("%s does damage of %d\n", enemyName.c_str(), attack - playerDefense);
+				}
+				
 				return;
 			}
 		}
@@ -252,4 +347,13 @@ void Level::updateEnemies(Player* &player) {
 			break;
 		}
 	}
+}
+
+
+void Level::newLevel(Player* &player)
+{
+	_levelNumber++;
+	_levelData.clear();
+	_levelDataCutScene.clear();
+	load(_levels[_levelNumber], player);
 }

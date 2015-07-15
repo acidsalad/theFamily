@@ -12,6 +12,7 @@ public:
 
 	void init(int hp, int pp, int level, int experience, int attack, int toNextLevel);
 
+
 	//getters
 	int getLevel() { return _level; }
 	int getExp() { return _exp; }
